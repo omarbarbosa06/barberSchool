@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "check:pages": "node scripts/check-pages-build.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
