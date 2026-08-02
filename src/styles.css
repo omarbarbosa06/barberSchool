@@ -51,7 +51,7 @@ p, h1, h2, h3 { margin-top: 0; }
 .button-light { background: #f0f1f1; color: #0d0e0f; }
 
 .hero { position: relative; min-height: 850px; display: flex; align-items: center; isolation: isolate; border-bottom: 1px solid var(--line); }
-.hero-backdrop { position: absolute; inset: 0; z-index: -3; background: url('./images/deleon-hero.png') center/cover no-repeat; }
+.hero-backdrop { position: absolute; inset: 0; z-index: -3; background: url('./assets/deleon-hero.png') center/cover no-repeat; }
 .hero::after { content: ''; position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(5,6,7,.98) 0%, rgba(5,6,7,.91) 26%, rgba(5,6,7,.35) 60%, rgba(5,6,7,.12) 100%), linear-gradient(0deg, rgba(4,5,5,.5), transparent 45%); }
 .hero-grain { position: absolute; inset: 0; z-index: -1; opacity: .12; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); }
 .hero-content { padding-top: 114px; }

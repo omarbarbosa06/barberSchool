@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import logoUrl from './assets/logo.png'
 import {
   ArrowDownRight,
   ArrowRight,
@@ -64,7 +65,7 @@ function Brand() {
     <a className="brand" href="#top" aria-label="DeLeon Academy home">
       {!logoError ? (
         <img
-          src="./logo.png"
+          src={logoUrl}
           alt="DeLeon Barber &amp; Beauty Academy Logo"
           className="brand-logo"
           onError={() => setLogoError(true)}
