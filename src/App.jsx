@@ -8,6 +8,7 @@ import {
   Clock3,
   GraduationCap,
   HandCoins,
+  Mail,
   MapPin,
   Menu,
   Phone,
@@ -57,13 +58,24 @@ const requirements = [
 ]
 
 function Brand() {
+  const [logoError, setLogoError] = useState(false)
+
   return (
     <a className="brand" href="#top" aria-label="DeLeon Academy home">
-      <svg className="brand-mark" viewBox="0 0 50 56" aria-hidden="true">
-        <path d="M25 2 46 10v16c0 13-8 23-21 28C12 49 4 39 4 26V10L25 2Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M25 8 40 14v12c0 9-5 16-15 21-10-5-15-12-15-21V14l15-6Z" fill="currentColor" opacity=".08" />
-        <path d="M17 36c7-1 13-7 16-17-8 3-13 8-16 17Zm5-15c2 3 5 5 10 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      </svg>
+      {!logoError ? (
+        <img
+          src="/logo.png"
+          alt="DeLeon Barber &amp; Beauty Academy Logo"
+          className="brand-logo"
+          onError={() => setLogoError(true)}
+        />
+      ) : (
+        <svg className="brand-mark" viewBox="0 0 50 56" aria-hidden="true">
+          <path d="M25 2 46 10v16c0 13-8 23-21 28C12 49 4 39 4 26V10L25 2Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M25 8 40 14v12c0 9-5 16-15 21-10-5-15-12-15-21V14l15-6Z" fill="currentColor" opacity=".08" />
+          <path d="M17 36c7-1 13-7 16-17-8 3-13 8-16 17Zm5-15c2 3 5 5 10 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      )}
       <span><b>DELEON</b><small>BARBER &amp; BEAUTY ACADEMY</small></span>
     </a>
   )
@@ -81,6 +93,31 @@ function App() {
 
   const closeMenu = () => setMenuOpen(false)
   const openTour = () => { setTourOpen(true); setSubmitted(false); setMenuOpen(false) }
+
+  const handleTourSubmit = (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const name = formData.get('name') || ''
+    const phone = formData.get('phone') || ''
+    const email = formData.get('email') || ''
+    const program = formData.get('program') || ''
+
+    const subject = encodeURIComponent(`Tour Request - ${name}`)
+    const body = encodeURIComponent(
+      `Hello DeLeon Academy Admissions,\n\nI would like to schedule a tour of the academy.\n\n` +
+      `Here are my details:\n` +
+      `- Full Name: ${name}\n` +
+      `- Phone Number: ${phone}\n` +
+      `- Email Address: ${email}\n` +
+      `- Program of Interest: ${program}\n\n` +
+      `Thank you!`
+    )
+
+    if (import.meta.env.MODE !== 'test') {
+      window.location.href = `mailto:deleonacademy@gmail.com?subject=${subject}&body=${body}`
+    }
+    setSubmitted(true)
+  }
 
   return (
     <div id="top" className="site-shell">
@@ -205,6 +242,7 @@ function App() {
               <p>Bring your ambition. We’ll help you turn it into a professional foundation.</p>
               <div className="admission-actions">
                 <a className="button button-light" href="tel:+15126329742">Call admissions <Phone size={17} /></a>
+                <a className="button button-ghost" href="mailto:deleonacademy@gmail.com">Email admissions <Mail size={17} /></a>
                 <button className="text-link" onClick={openTour}>Schedule a tour <ArrowRight size={17} /></button>
               </div>
             </div>
@@ -224,6 +262,7 @@ function App() {
             <div><Brand /><p>Educate <span>★</span> Elevate <span>★</span> Empower</p></div>
             <div className="footer-contact">
               <a href="tel:+15126329742"><Phone size={18} /> <span><small>Speak with admissions</small>(512) 632-9742</span></a>
+              <a href="mailto:deleonacademy@gmail.com"><Mail size={18} /> <span><small>Email admissions</small>deleonacademy@gmail.com</span></a>
               <a href="https://maps.google.com/?q=5316+Menchaca+Rd+Austin+TX+78745" target="_blank" rel="noreferrer"><MapPin size={18} /> <span><small>Visit the academy</small>5316 Menchaca Rd.<br />Austin, TX 78745</span></a>
             </div>
           </div>
@@ -240,18 +279,26 @@ function App() {
                 <div className="success-icon"><Check size={28} /></div>
                 <p className="kicker">You’re on the list</p>
                 <h2 id="tour-title">We’ll be in touch.</h2>
-                <p>Thanks for your interest. Our admissions team will contact you to schedule your visit.</p>
-                <button className="button button-primary" onClick={() => setTourOpen(false)}>Close</button>
+                <p>Thanks for your interest. Our admissions team will contact you soon. You can also reach out anytime at <a href="mailto:deleonacademy@gmail.com" className="email-link">deleonacademy@gmail.com</a>.</p>
+                <div className="modal-actions">
+                  <a className="button button-ghost" href="mailto:deleonacademy@gmail.com"><Mail size={16} /> Send Email</a>
+                  <button className="button button-primary" onClick={() => setTourOpen(false)}>Close</button>
+                </div>
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}>
+              <form onSubmit={handleTourSubmit}>
                 <p className="kicker">Come see the academy</p>
                 <h2 id="tour-title">Schedule a tour.</h2>
                 <p>Tell us how to reach you and our admissions team will help find a time.</p>
                 <label>Full name<input name="name" type="text" autoComplete="name" required placeholder="Your name" /></label>
                 <label>Phone number<input name="phone" type="tel" autoComplete="tel" required placeholder="(512) 555-0123" /></label>
+                <label>Email address<input name="email" type="email" autoComplete="email" required placeholder="name@example.com" /></label>
                 <label>Program of interest<select name="program" defaultValue=""><option value="" disabled>Select a program</option><option>Class A Barber</option><option>Cosmetology</option><option>Not sure yet</option></select></label>
                 <button className="button button-primary" type="submit">Request my tour <ArrowRight size={17} /></button>
+                <div className="modal-direct-email">
+                  <span>Prefer to email directly?</span>
+                  <a href="mailto:deleonacademy@gmail.com"><Mail size={14} /> deleonacademy@gmail.com</a>
+                </div>
               </form>
             )}
           </section>

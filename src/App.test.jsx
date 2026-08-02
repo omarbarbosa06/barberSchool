@@ -19,6 +19,7 @@ describe('DeLeon Academy website', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument()
     await user.type(screen.getByLabelText(/full name/i), 'Jordan Lee')
     await user.type(screen.getByLabelText(/phone number/i), '5125550100')
+    await user.type(screen.getByLabelText(/email address/i), 'jordan@example.com')
     await user.selectOptions(screen.getByLabelText(/program of interest/i), 'Class A Barber')
     await user.click(screen.getByRole('button', { name: /request my tour/i }))
     expect(await screen.findByRole('heading', { name: /we’ll be in touch/i })).toBeInTheDocument()

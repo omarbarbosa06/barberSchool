@@ -27,7 +27,8 @@ p, h1, h2, h3 { margin-top: 0; }
 
 .header { position: absolute; z-index: 20; top: 0; left: 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,.12); }
 .nav-wrap { width: min(1360px, calc(100% - 48px)); height: 88px; margin: auto; display: flex; align-items: center; gap: 42px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.brand { display: inline-flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+.brand-logo { height: 44px; width: auto; max-width: 140px; object-fit: contain; display: block; border-radius: 4px; }
 .brand-mark { width: 35px; height: 42px; color: var(--silver-bright); }
 .brand span { display: flex; flex-direction: column; line-height: 1; }
 .brand b { font-family: 'Cormorant Garamond', serif; font-size: 24px; letter-spacing: .12em; font-weight: 600; }
@@ -148,11 +149,11 @@ p, h1, h2, h3 { margin-top: 0; }
 .footer .brand small { font-size: 8px; }
 .footer-top > div:first-child > p { margin: 20px 0 0 54px; color: #6f7477; text-transform: uppercase; letter-spacing: .22em; font-size: 8px; }
 .footer-top > div:first-child > p span { color: #b7bbbd; margin: 0 7px; }
-.footer-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; }
-.footer-contact a { display: flex; align-items: flex-start; gap: 15px; color: #d7dadc; font-size: 12px; line-height: 1.65; }
+.footer-contact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.footer-contact a { display: flex; align-items: flex-start; gap: 12px; color: #d7dadc; font-size: 11.5px; line-height: 1.6; word-break: break-word; }
 .footer-contact svg { margin-top: 4px; color: #9da2a5; flex: 0 0 auto; }
 .footer-contact span { display: flex; flex-direction: column; }
-.footer-contact small { margin-bottom: 7px; color: #676c6f; text-transform: uppercase; letter-spacing: .12em; font-size: 8px; }
+.footer-contact small { margin-bottom: 6px; color: #676c6f; text-transform: uppercase; letter-spacing: .12em; font-size: 8px; }
 .footer-bottom { padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; color: #5f6467; font-size: 9px; }
 .footer-bottom a { color: #a8adaf; text-transform: uppercase; letter-spacing: .1em; }
 
@@ -165,6 +166,11 @@ p, h1, h2, h3 { margin-top: 0; }
 .tour-modal input, .tour-modal select { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 0; outline: 0; background: #0a0c0d; color: #fff; font-size: 12px; }
 .tour-modal input:focus, .tour-modal select:focus { border-color: var(--silver); }
 .tour-modal form .button { width: 100%; margin-top: 8px; }
+.modal-direct-email { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--muted); }
+.modal-direct-email a { display: inline-flex; align-items: center; gap: 6px; color: var(--silver-bright); font-weight: 600; text-decoration: underline; }
+.modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
+.modal-actions .button { flex: 1; }
+.email-link { color: var(--silver-bright); text-decoration: underline; }
 .success-message { padding: 25px 0; text-align: center; }
 .success-icon { width: 62px; height: 62px; margin: 0 auto 24px; border: 1px solid var(--silver); display: grid; place-items: center; color: var(--silver); }
 .success-message .kicker { margin-bottom: 14px; }
