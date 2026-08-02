@@ -64,7 +64,7 @@ function Brand() {
     <a className="brand" href="#top" aria-label="DeLeon Academy home">
       {!logoError ? (
         <img
-          src="/logo.png"
+          src="./logo.png"
           alt="DeLeon Barber &amp; Beauty Academy Logo"
           className="brand-logo"
           onError={() => setLogoError(true)}
