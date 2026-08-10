@@ -115,7 +115,7 @@ function App() {
     )
 
     if (import.meta.env.MODE !== 'test') {
-      window.location.href = `mailto:deleonacademy@gmail.com?subject=${subject}&body=${body}`
+      window.location.href = `mailto:deleonacademyatx@gmail.com?subject=${subject}&body=${body}`
     }
     setSubmitted(true)
   }
@@ -243,7 +243,7 @@ function App() {
               <p>Bring your ambition. We’ll help you turn it into a professional foundation.</p>
               <div className="admission-actions">
                 <a className="button button-light" href="tel:+15126329742">Call admissions <Phone size={17} /></a>
-                <a className="button button-ghost" href="mailto:deleonacademy@gmail.com">Email admissions <Mail size={17} /></a>
+                <a className="button button-ghost" href="mailto:deleonacademyatx@gmail.com">Email admissions <Mail size={17} /></a>
                 <button className="text-link" onClick={openTour}>Schedule a tour <ArrowRight size={17} /></button>
               </div>
             </div>
@@ -263,7 +263,7 @@ function App() {
             <div><Brand /><p>Educate <span>★</span> Elevate <span>★</span> Empower</p></div>
             <div className="footer-contact">
               <a href="tel:+15126329742"><Phone size={18} /> <span><small>Speak with admissions</small>(512) 632-9742</span></a>
-              <a href="mailto:deleonacademy@gmail.com"><Mail size={18} /> <span><small>Email admissions</small>deleonacademy@gmail.com</span></a>
+              <a href="mailto:deleonacademyatx@gmail.com"><Mail size={18} /> <span><small>Email admissions</small>deleonacademyatx@gmail.com</span></a>
               <a href="https://maps.google.com/?q=5316+Menchaca+Rd+Austin+TX+78745" target="_blank" rel="noreferrer"><MapPin size={18} /> <span><small>Visit the academy</small>5316 Menchaca Rd.<br />Austin, TX 78745</span></a>
             </div>
           </div>
@@ -280,9 +280,9 @@ function App() {
                 <div className="success-icon"><Check size={28} /></div>
                 <p className="kicker">You’re on the list</p>
                 <h2 id="tour-title">We’ll be in touch.</h2>
-                <p>Thanks for your interest. Our admissions team will contact you soon. You can also reach out anytime at <a href="mailto:deleonacademy@gmail.com" className="email-link">deleonacademy@gmail.com</a>.</p>
+                <p>Thanks for your interest. Our admissions team will contact you soon. You can also reach out anytime at <a href="mailto:deleonacademyatx@gmail.com" className="email-link">deleonacademyatx@gmail.com</a>.</p>
                 <div className="modal-actions">
-                  <a className="button button-ghost" href="mailto:deleonacademy@gmail.com"><Mail size={16} /> Send Email</a>
+                  <a className="button button-ghost" href="mailto:deleonacademyatx@gmail.com"><Mail size={16} /> Send Email</a>
                   <button className="button button-primary" onClick={() => setTourOpen(false)}>Close</button>
                 </div>
               </div>
@@ -298,7 +298,7 @@ function App() {
                 <button className="button button-primary" type="submit">Request my tour <ArrowRight size={17} /></button>
                 <div className="modal-direct-email">
                   <span>Prefer to email directly?</span>
-                  <a href="mailto:deleonacademy@gmail.com"><Mail size={14} /> deleonacademy@gmail.com</a>
+                  <a href="mailto:deleonacademyatx@gmail.com"><Mail size={14} /> deleonacademyatx@gmail.com</a>
                 </div>
               </form>
             )}
