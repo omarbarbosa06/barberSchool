@@ -8,7 +8,6 @@ import {
   Check,
   Clock3,
   GraduationCap,
-  HandCoins,
   Mail,
   MapPin,
   Menu,
@@ -24,7 +23,6 @@ const advantages = [
   { icon: GraduationCap, title: 'Industry Professionals', text: 'Learn from licensed professionals actively working in the industry.' },
   { icon: Users, title: 'Hands-On Experience', text: 'Gain confidence working directly with real clients.' },
   { icon: BriefcaseBusiness, title: 'Entrepreneurship Training', text: 'Build business ownership and management skills from day one.' },
-  { icon: HandCoins, title: 'Career Placement', text: 'Explore opportunity paths within the Country Cutz family.' },
   { icon: CalendarDays, title: 'Flexible Scheduling', text: 'Choose from multiple schedule options designed around your life.' },
 ]
 
@@ -57,6 +55,39 @@ const requirements = [
   '$25 TDLR student permit fee',
   '$250 registration fee',
 ]
+
+function openEmail({ to, subject = '', body = '' }) {
+  if (typeof window === 'undefined' || import.meta.env.MODE === 'test') return
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+  const encSubject = encodeURIComponent(subject)
+  const encBody = encodeURIComponent(body)
+
+  if (isMobile) {
+    const gmailAppUrl = `googlegmail://co?to=${to}&subject=${encSubject}&body=${encBody}`
+    const mailtoUrl = `mailto:${to}?subject=${encSubject}&body=${encBody}`
+
+    let appOpened = false
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        appOpened = true
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    window.location.href = gmailAppUrl
+
+    setTimeout(() => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      if (!appOpened) {
+        window.location.href = mailtoUrl
+      }
+    }, 600)
+  } else {
+    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${encSubject}&body=${encBody}`
+    window.open(gmailWebUrl, '_blank', 'noopener,noreferrer')
+  }
+}
 
 function Brand() {
   const [logoError, setLogoError] = useState(false)
@@ -103,8 +134,8 @@ function App() {
     const email = formData.get('email') || ''
     const program = formData.get('program') || ''
 
-    const subject = encodeURIComponent(`Tour Request - ${name}`)
-    const body = encodeURIComponent(
+    const subject = `Tour Request - ${name}`
+    const body =
       `Hello DeLeon Academy Admissions,\n\nI would like to schedule a tour of the academy.\n\n` +
       `Here are my details:\n` +
       `- Full Name: ${name}\n` +
@@ -112,11 +143,8 @@ function App() {
       `- Email Address: ${email}\n` +
       `- Program of Interest: ${program}\n\n` +
       `Thank you!`
-    )
 
-    if (import.meta.env.MODE !== 'test') {
-      window.location.href = `mailto:deleonacademyatx@gmail.com?subject=${subject}&body=${body}`
-    }
+    openEmail({ to: 'deleonacademyaustintx@gmail.com', subject, body })
     setSubmitted(true)
   }
 
@@ -226,10 +254,11 @@ function App() {
                   </div>
                 ))}
               </div>
-              <div className="scholarship">
-                <GraduationCap size={28} strokeWidth={1.25} />
-                <div><p>Yolanda DeLeon Scholarship</p><span>A limited number of eligible students may qualify for reduced tuition costs.</span></div>
-                <a href="#admissions">Learn if you qualify <ArrowRight size={16} /></a>
+              <div className="payment-footer">
+                <button className="scholarship-btn" onClick={openTour}>
+                  <span><GraduationCap size={16} /> Ready To Make Your Move?</span>
+                  <ArrowRight size={15} />
+                </button>
               </div>
             </div>
           </div>
@@ -243,7 +272,7 @@ function App() {
               <p>Bring your ambition. We’ll help you turn it into a professional foundation.</p>
               <div className="admission-actions">
                 <a className="button button-light" href="tel:+15126329742">Call admissions <Phone size={17} /></a>
-                <a className="button button-ghost" href="mailto:deleonacademyatx@gmail.com">Email admissions <Mail size={17} /></a>
+                <a className="button button-ghost" href="https://mail.google.com/mail/?view=cm&fs=1&to=deleonacademyaustintx@gmail.com" onClick={(e) => { e.preventDefault(); openEmail({ to: 'deleonacademyaustintx@gmail.com' }); }}>Email admissions <Mail size={17} /></a>
                 <button className="text-link" onClick={openTour}>Schedule a tour <ArrowRight size={17} /></button>
               </div>
             </div>
@@ -263,7 +292,7 @@ function App() {
             <div><Brand /><p>Educate <span>★</span> Elevate <span>★</span> Empower</p></div>
             <div className="footer-contact">
               <a href="tel:+15126329742"><Phone size={18} /> <span><small>Speak with admissions</small>(512) 632-9742</span></a>
-              <a href="mailto:deleonacademyatx@gmail.com"><Mail size={18} /> <span><small>Email admissions</small>deleonacademyatx@gmail.com</span></a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=deleonacademyaustintx@gmail.com" onClick={(e) => { e.preventDefault(); openEmail({ to: 'deleonacademyaustintx@gmail.com' }); }}><Mail size={18} /> <span><small>Email admissions</small>deleonacademyaustintx@gmail.com</span></a>
               <a href="https://maps.google.com/?q=5316+Menchaca+Rd+Austin+TX+78745" target="_blank" rel="noreferrer"><MapPin size={18} /> <span><small>Visit the academy</small>5316 Menchaca Rd.<br />Austin, TX 78745</span></a>
             </div>
           </div>
@@ -280,9 +309,9 @@ function App() {
                 <div className="success-icon"><Check size={28} /></div>
                 <p className="kicker">You’re on the list</p>
                 <h2 id="tour-title">We’ll be in touch.</h2>
-                <p>Thanks for your interest. Our admissions team will contact you soon. You can also reach out anytime at <a href="mailto:deleonacademyatx@gmail.com" className="email-link">deleonacademyatx@gmail.com</a>.</p>
+                <p>Thanks for your interest. Our admissions team will contact you soon. You can also reach out anytime at <a href="https://mail.google.com/mail/?view=cm&fs=1&to=deleonacademyaustintx@gmail.com" onClick={(e) => { e.preventDefault(); openEmail({ to: 'deleonacademyaustintx@gmail.com' }); }} className="email-link">deleonacademyaustintx@gmail.com</a>.</p>
                 <div className="modal-actions">
-                  <a className="button button-ghost" href="mailto:deleonacademyatx@gmail.com"><Mail size={16} /> Send Email</a>
+                  <a className="button button-ghost" href="https://mail.google.com/mail/?view=cm&fs=1&to=deleonacademyaustintx@gmail.com" onClick={(e) => { e.preventDefault(); openEmail({ to: 'deleonacademyaustintx@gmail.com' }); }}><Mail size={16} /> Send Email</a>
                   <button className="button button-primary" onClick={() => setTourOpen(false)}>Close</button>
                 </div>
               </div>
@@ -298,7 +327,7 @@ function App() {
                 <button className="button button-primary" type="submit">Request my tour <ArrowRight size={17} /></button>
                 <div className="modal-direct-email">
                   <span>Prefer to email directly?</span>
-                  <a href="mailto:deleonacademyatx@gmail.com"><Mail size={14} /> deleonacademyatx@gmail.com</a>
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=deleonacademyaustintx@gmail.com" onClick={(e) => { e.preventDefault(); openEmail({ to: 'deleonacademyaustintx@gmail.com' }); }}><Mail size={14} /> deleonacademyaustintx@gmail.com</a>
                 </div>
               </form>
             )}

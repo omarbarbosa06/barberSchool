@@ -255,7 +255,7 @@ h3 {
 }
 
 .hero-content {
-  padding-top: 114px;
+  padding: 130px 0 80px;
 }
 
 .eyebrow,
@@ -399,7 +399,7 @@ h2 em {
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .advantage-card {
@@ -408,6 +408,12 @@ h2 em {
   padding: 35px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  grid-column: span 2;
+}
+
+.advantage-card:nth-child(4),
+.advantage-card:nth-child(5) {
+  grid-column: span 3;
 }
 
 .icon-box {
@@ -690,41 +696,47 @@ h2 em {
   color: var(--silver-bright);
 }
 
-.scholarship {
-  margin: 0 16px 16px;
-  padding: 23px;
-  border: 1px solid rgba(219, 223, 225, .32);
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 16px;
-  background: linear-gradient(110deg, rgba(203, 207, 210, .09), transparent);
+.payment-footer {
+  padding: 16px 26px 26px;
+  border-top: 1px solid var(--line);
 }
 
-.scholarship>svg {
-  color: var(--silver);
-}
-
-.scholarship p {
-  margin-bottom: 6px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-}
-
-.scholarship span {
-  color: var(--muted);
-  line-height: 1.5;
-  font-size: 10px;
-}
-
-.scholarship a {
-  grid-column: 2;
+.scholarship-btn {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid rgba(225, 229, 232, .22);
+  background: rgba(255, 255, 255, .03);
+  color: var(--silver-bright);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #dadddf;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  font-size: 8px;
   letter-spacing: .12em;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.scholarship-btn span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scholarship-btn:hover {
+  background: rgba(255, 255, 255, .09);
+  border-color: var(--silver);
+  color: #ffffff;
+}
+
+.scholarship-btn svg:last-child {
+  transition: transform .2s ease;
+}
+
+.scholarship-btn:hover svg:last-child {
+  transform: translateX(4px);
 }
 
 .admissions-section {
@@ -1073,6 +1085,15 @@ h2 em {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .advantage-card,
+  .advantage-card:nth-child(4) {
+    grid-column: span 1;
+  }
+
+  .advantage-card:nth-child(5) {
+    grid-column: span 2;
+  }
+
   .tuition-layout,
   .admissions-layout {
     grid-template-columns: 1fr;
@@ -1328,7 +1349,9 @@ h2 em {
     grid-template-columns: 1fr;
   }
 
-  .advantage-card {
+  .advantage-card,
+  .advantage-card:nth-child(5) {
+    grid-column: span 1;
     min-height: 210px;
   }
 
